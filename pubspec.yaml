@@ -20,7 +20,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/squirt1.png
+    - assets/squirtle1.png
+    - assets/squirtle2.png
+    - assets/pokeball.gif
   # fonts:
   #   - family: Schyler
   #     fonts:
