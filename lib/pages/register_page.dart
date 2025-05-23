@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               Center(
                 child: Image.asset(
-                  'assets/squirtle1.png',
+                  'assets/squirtle2.png',
                   height: 200,
                   width: 200,
                 ),
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Login',
+                  'Cadastrar',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
               TextField(
                 controller: _emailController,
                 decoration: const InputDecoration(
-                  labelText: 'Email',
+                  labelText: 'Digite seu email',
                   labelStyle: TextStyle(color: Color(0xff000000)),
                   border: OutlineInputBorder(),
                 ),
@@ -86,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                 controller: _passwordController,
                 obscureText: true,
                 decoration: const InputDecoration(
-                  labelText: 'Password',
+                  labelText: 'Digite seu password',
                   labelStyle: TextStyle(color: Color(0xff000000)),
                   border: OutlineInputBorder(),
                 ),
@@ -103,16 +103,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 32),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                const Text('Não tem um cadastro?'),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Cadastre-se',
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                ),
-              ])
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Pokémon! Temos que pegar'),
+                  const SizedBox(height: 32),
+                ],
+              ),
             ],
           ),
         ),
