@@ -9,14 +9,13 @@ import 'package:pokedex_app/pages/login_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: const FirebaseOptions(
-      apiKey: "AIzaSyAdLhrosWB3cdXYzoAeqQinRglEIOjAUCo",
-      authDomain: "pokedex-app-e69f0.firebaseapp.com",
-      projectId: "pokedex-app-e69f0",
-      storageBucket: "pokedex-app-e69f0.firebasestorage.app",
-      messagingSenderId: "490515922297",
-      appId: "1:490515922297:web:c4606c0c42cc15aa3603a8"
-    ),
+      options: const FirebaseOptions(
+          apiKey: "AIzaSyAdLhrosWB3cdXYzoAeqQinRglEIOjAUCo",
+          authDomain: "pokedex-app-e69f0.firebaseapp.com",
+          projectId: "pokedex-app-e69f0",
+          storageBucket: "pokedex-app-e69f0.firebasestorage.app",
+          messagingSenderId: "490515922297",
+          appId: "1:490515922297:web:c4606c0c42cc15aa3603a8"));
   runApp(const MyApp());
 }
 
