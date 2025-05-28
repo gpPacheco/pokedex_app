@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
-
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
@@ -12,12 +11,37 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
-  void _login() {
-    String email = _emailController.text;
-    String password = _passwordController.text;
-    print('Email: $email');
-    print('Password: $password');
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  _register() async {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Preencha todos os campos!')),
+      );
+      return;
+    }
+    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(email)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Digite um email válido!')),
+      );
+      return;
+    }
+    try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text('Usuário cadastrado: ${userCredential.user!.email}')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao cadastrar: $e')),
+      );
+    }
   }
 
   @override
@@ -38,14 +62,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
-            )
+            ),
           ],
         ),
         backgroundColor: Colors.red,
         elevation: 0,
       ),
       body: Container(
-        color: const Color(0xffffffff),
+        color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -59,25 +83,23 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               const SizedBox(height: 32),
-              const Align(
+              Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Cadastrar',
-                  style: TextStyle(
+                  style: GoogleFonts.dmSerifText(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xff000000),
+                    color: Colors.black,
                   ),
                 ),
               ),
               const SizedBox(height: 32),
-              // Add your form fields here (email and password inputs)
-              // For example:
               TextField(
                 controller: _emailController,
                 decoration: const InputDecoration(
                   labelText: 'Digite seu email',
-                  labelStyle: TextStyle(color: Color(0xff000000)),
+                  labelStyle: TextStyle(color: Colors.black),
                   border: OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.emailAddress,
@@ -85,16 +107,16 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(height: 16),
               TextField(
                 controller: _passwordController,
-                obscureText: true,
                 decoration: const InputDecoration(
                   labelText: 'Digite seu password',
-                  labelStyle: TextStyle(color: Color(0xff000000)),
+                  labelStyle: TextStyle(color: Colors.black),
                   border: OutlineInputBorder(),
                 ),
+                obscureText: true,
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: _register,
                 child: const Text(
                   'Cadastrar',
                   style: TextStyle(color: Colors.black),
@@ -110,7 +132,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   const Text('Pokémon! Temos que pegar'),
                   const SizedBox(height: 32),
                 ],
-              ),
+              )
             ],
           ),
         ),
